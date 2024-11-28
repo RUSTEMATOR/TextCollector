@@ -25,7 +25,6 @@ export class Collector {
     async checkIfEnabled(locator: string){
         const isEnabled = await this.page.evaluate((locator: string) => {
 
-        
             const promoItems = document.querySelectorAll(locator);
                 if (promoItems.length === 0) return false; 
 
@@ -43,5 +42,11 @@ export class Collector {
             console.log(`Element ${isEnabled}`)
             return isEnabled
         }
+
+    // async collectSeqquentially(locator: string){
+    //     const text = await this.page.locator(locator).innerText()
+    //     console.log(`Collected text: ${text}`)
+    //     return {text, this.collectSeqquentially()}
+    // }
     
 }

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import Navigator from '../src/Navigator/Navigator';
 import { CREDS } from '../src/AccountData/vipNoVip';
 import fs from "fs"
-import { Collector } from '../src/Collector/Collector';
+import {Collector}  from '../src/Collector/Collector';
 
 
 test.describe('fawef', () => {
@@ -32,16 +32,28 @@ test('fawef', async ({ page }) => {
   for (let i = 1; i <= numberOfCards; i++) {
     const Availabability = await collector.checkIfEnabled(`div.promo-item:nth-of-type(${i}`)
     
-    console.log(Availabability)
+    if(Availabability === true) {
+        console.log(`Element ${i} is enabled`)
+        
+        await page.locator(`div.promo-item:nth-of-type(${i}) button.promo-item__info`).click()
+        await collector.collectTextFromElement('.promo-modal__right')
+        const text = await page.locator(`.promo-modal__right`).innerText()
+        
+        await page.locator('.modal__close-button').click()
+        console.log(text)
+        fs.writeFileSync(`file${i}.txt`, text)
+    } else {
+      console.log(`Element ${i} is disabled`)
+      continue  
+    }
 
-    await page.locator(`div.promo-item:nth-of-type(${i}) button.promo-item__info`).click()
-    const text = await page.locator(`.promo-modal__right`).innerText()
-    await page.locator('.modal__close-button').click()
-    console.log(text)
-    fs.writeFileSync(`file${i}.xlsx`, text)
+    // await page.locator(`div.promo-item:nth-of-type(${i}) button.promo-item__info`).click()
+    // const text = await page.locator(`.promo-modal__right`).innerText()
+    // await page.locator('.modal__close-button').click()
+    // console.log(text)
+    // fs.writeFileSync(`file${i}.xlsx`, text)
   }
 
-  
 })
 
 })
