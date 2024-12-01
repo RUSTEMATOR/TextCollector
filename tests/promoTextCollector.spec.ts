@@ -6,7 +6,7 @@ import fs from "fs"
 import {Collector}  from '../src/Collector/Collector';
 
 
-test.describe('fawef', () => {
+test.describe('Promo text ', () => {
 let nav
 let collector
 
@@ -45,9 +45,8 @@ let collector
             await page.locator('.modal__close-button').click()
             console.log(text)
 
-            fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Text`, {recursive: true})
+            
             fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Table`, {recursive: true})
-            fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Text/${i}_${promoTitle}.txt`, text)
             fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Table/${i}_${promoTitle}.xlsx`, text)
 
 
