@@ -1,7 +1,7 @@
 import { type Page, expect } from "@playwright/test";
 
 export default class Navigator {
-  private page: Page;
+  readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;

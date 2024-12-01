@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import Navigator from '../src/Navigator/Navigator';
 import { CREDS } from '../src/AccountData/vipNoVip';
 import fs from "fs"
