@@ -18,11 +18,14 @@ let collector
       collector = new Collector(page)
 
       await nav.navigateTo({url: 'https://www.kingbillycasino.com/', locator: '#header_log_in_btn'}, )
+      await nav.clickOnElement('#accept_initial_notification_button')
       await nav.clickOnElement('#header_log_in_btn')
       await nav.fillInCredentials({email: creds.email, password: creds.password})
       await nav.page.waitForTimeout(1000)
 
       await nav.navigateTo({url:'https://www.kingbillycasino.com/promotions'})
+
+      await nav.page.waitForTimeout(1000)
     
       
       const numberOfCards = await nav.checkNumberOfElements('.promo-item')

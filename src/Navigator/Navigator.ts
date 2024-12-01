@@ -60,6 +60,10 @@ export default class Navigator {
     return numberOfCards;
   }
 
+  async goBack(){
+    this.page.goBack()
+  }
+
   async deleteElement(selector: string, elementDescription: string): Promise<any> {
     await this.page.evaluate(async () => {
       await document.querySelector(selector).remove()
