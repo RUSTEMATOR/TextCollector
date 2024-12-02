@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 import Navigator from '../src/Navigator/Navigator';
-import { CREDS } from '../src/AccountData/vipNoVip';
+import { CREDS } from '../src/Data/AccountData/vipNoVip';
 import fs from "fs"
 import {Collector}  from '../src/Collector/Collector';
+import { INDEX_LANGUAGES } from '../src/Data/Languages/Languages';
 
 
-test.describe('fawef', () => {
+test.describe('Promo text ', () => {
 let nav
 let collector
 
@@ -18,11 +19,15 @@ let collector
       collector = new Collector(page)
 
       await nav.navigateTo({url: 'https://www.kingbillycasino.com/', locator: '#header_log_in_btn'}, )
+
+      await nav.clickOnElement('#accept_initial_notification_button')
       await nav.clickOnElement('#header_log_in_btn')
       await nav.fillInCredentials({email: creds.email, password: creds.password})
       await nav.page.waitForTimeout(1000)
 
       await nav.navigateTo({url:'https://www.kingbillycasino.com/promotions'})
+
+      await nav.page.waitForTimeout(1000)
     
       
       const numberOfCards = await nav.checkNumberOfElements('.promo-item')
@@ -43,14 +48,9 @@ let collector
             // const text = await page.locator(`.promo-modal__right`).innerText()
             
             await page.locator('.modal__close-button').click()
-            console.log(text)
 
-            fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Text`, {recursive: true})
             fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Table`, {recursive: true})
-            // fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Text/${i}_${promoTitle}.txt`, text)
             fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Table/${i}_${promoTitle}.xlsx`, text)
-
-
 
         } else {
           console.log(`Element ${i} is disabled`)
