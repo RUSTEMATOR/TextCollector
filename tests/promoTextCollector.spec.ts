@@ -47,7 +47,7 @@ let collector
 
             fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Text`, {recursive: true})
             fs.mkdirSync(`ExtractedText/PromoPage/${account_name}/Table`, {recursive: true})
-            fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Text/${i}_${promoTitle}.txt`, text)
+            // fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Text/${i}_${promoTitle}.txt`, text)
             fs.writeFileSync(`ExtractedText/PromoPage/${account_name}/Table/${i}_${promoTitle}.xlsx`, text)
 
 
